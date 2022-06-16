@@ -4,37 +4,29 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
-const some = document.querySelectorAll('.like-glyph')
-
-
-function clickLike(event)
-
-  console.log(event.target)
+const likehearts = document.querySelectorAll(".like-glyph")
+function likebutton(e){
+  alert("Do you want to like this post?")
+  const heart = e.target
   mimicServerCall()
-  .then((obj)=> {
-    
-    if(event.target.innerText === EMPTY_HEART){
-      event.target.innerText = FULL_HEART
-      some.event.classList.add('activated-heart')
-    }else{
-      event.target.innerText = EMPTY_HEART
-      some.event.classList.remove('activated-heart')
+  .then(function(){
+    if (heart.innerHTML === EMPTY_HEART){
+      heart.innerHTML = FULL_HEART;
+      heart.className = "activated-heart"
+    } else {
+      heart.innerHTML = EMPTY_HEART;
+      heart.className = "";
     }
-    
   })
-  .catch(()=>{
-    let error = document.querySelector('div#modal')
-    setTimeout(()=>{
-      error.classList.remove('.hidden')
-      console.log(error)
-    }, 1000)
+  .catch(function(error){
+    const err = document.getElementById("modal");
+    err.innerHTML = error
+    setTimeout(() => err.className = "hidden", 3000);
   })
 }
-
-some.forEach(some => {
-  some.addEventListener('click', clickLike)
+likehearts.forEach(likehearts => {
+  likehearts.addEventListener("click",likebutton)
 })
-
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
 //------------------------------------------------------------------------------
